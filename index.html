@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FHIR Demo</title>
+    <style>
+        body {background-color: darkgray; color: green; text-align: center}
+        button {color: green; background-color: black; font-weight: bold; padding: 15px; border: none}
+        p, div, span, td, a {font-size: 25px; font-weight: normal;}
+        #conditions, #info {font-weight: bold;}
+        table, th, td, a {border: 1px solid black; display: table-cell}
+    </style>
+</head>
+<body>
+<h1>FHIR Demo</h1>
+<h2>by Luke Myers</h2>
+<p>Using the FHIR Open Source API to display a mock patient's demographic information and list of active conditions; enjoy!</p>
+<button id="conditionButton">Retrieve Patient's Information & Active Conditions</button>
+<hr>
+<div>
+    <div id="info">Patient's Information:</div>
+    <hr>
+    <div id="conditions">Active Conditions:</div>
+</div>
+<script src="fhir.js"></script>
+</body>
+</html>
