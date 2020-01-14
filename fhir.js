@@ -122,7 +122,7 @@ function sortActiveConditionsByDate(){
     conditionsTable = createNode("table");
     displayActiveConditions();
 }
-function sortDates(a, b){
+function sortDates(b, a){
     const dateA = a.dateRecorded;
     const dateB = b.dateRecorded;
     let comparison = 0;
