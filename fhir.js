@@ -108,8 +108,9 @@ function displayActiveConditions(){
             link = createNode("a");
         name.innerText = activeConditions[i].name;
         date.innerText = activeConditions[i].dateRecorded;
-        link.innerHTML = "More Information";
+        link.innerText = "More Information";
         link.href = activeConditions[i].link;
+        link.setAttribute("target", "_blank");
         append(conditionsTable, condition);
         append(condition, name);
         append(condition, date);
