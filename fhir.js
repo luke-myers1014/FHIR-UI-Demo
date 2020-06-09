@@ -29,7 +29,7 @@ function append(parent, child) {
     return parent.appendChild(child);
 }
 function preFetch() {
-    if(numClicks === 1) {
+    if (numClicks === 1) {
         alert("Already attempted to retrieve the patient's data! Please refresh the page to try again.");
     } else {
         fetchPatientInfo();
@@ -44,13 +44,13 @@ function fetchPatientInfo() {
 
     fetch(patientURL, fetchData)
     .then((response) => response.json())
-    .then(function(data) {
+    .then(function (data) {
         patient.name = data.entry[0].resource.name[0].text;
         patient.gender = data.entry[0].resource.gender;
         patient.birthDate = data.entry[0].resource.birthDate;
         span.innerHTML = `<br><br><b>Name:</b> ${patient.name}<br><b>Gender:</b> ${patient.gender}<br><b>Date of Birth:</b> ${patient.birthDate}`;
     })
-    .catch(function(error) {
+    .catch(function (error) {
         span.innerHTML = "<br><br>Failed to retrieve patient's information.";
         alert(`Failed to retrieve patient's information: ${error}`);
     });
@@ -65,8 +65,8 @@ function fetchConditions() {
     .then(function(data) {
         allConditions = data.entry;
 
-        for(let i = 0; i < allConditions.length; i++) {
-            if(allConditions[i].resource.clinicalStatus === "active") {
+        for (let i = 0; i < allConditions.length; i++) {
+            if (allConditions[i].resource.clinicalStatus === "active") {
                 let condition = {
                     name: allConditions[i].resource.code.text,
                     dateRecorded: allConditions[i].resource.dateRecorded
@@ -82,7 +82,7 @@ function fetchConditions() {
         sortButton.innerText = "Sort by Date";
         displayActiveConditions();
     })
-    .catch(function(error) {
+    .catch(function (error) {
         span.innerHTML = "<br><br>Failed to retrieve patient's active conditions.";
         alert(`Failed to retrieve patient's conditions: ${error}`);
     });
@@ -101,7 +101,7 @@ function displayActiveConditions() {
     append(headingRow, dateHeading);
     append(headingRow, linkHeading);
 
-    for(let i = 0; i < activeConditions.length; i++) {
+    for (let i = 0; i < activeConditions.length; i++) {
         let condition = createNode("tr"),
             name = createNode("td"),
             date = createNode("td"),
@@ -128,9 +128,9 @@ function sortDates(b, a) {
     const dateB = b.dateRecorded;
     let comparison = 0;
 
-    if(dateA > dateB) {
+    if (dateA > dateB) {
         comparison = 1;
-    } else if(dateA < dateB) {
+    } else if (dateA < dateB) {
         comparison = -1;
     }
     return comparison;
