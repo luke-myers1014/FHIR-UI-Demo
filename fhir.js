@@ -22,22 +22,22 @@ let numClicks = 0,
         headers: myHeader
     };
 
-function createNode(element){
+function createNode(element) {
     return document.createElement(element);
 }
-function append(parent, child){
+function append(parent, child) {
     return parent.appendChild(child);
 }
-function preFetch(){
-    if(numClicks === 1){
+function preFetch() {
+    if(numClicks === 1) {
         alert("Already attempted to retrieve the patient's data! Please refresh the page to try again.");
-    }else{
+    } else {
         fetchPatientInfo();
         fetchConditions();
         numClicks = 1;
     }
 }
-function fetchPatientInfo(){
+function fetchPatientInfo() {
     let span = createNode("span");
     append(patientInfoSection, span);
     span.innerHTML = "<br><br>Retrieving patient's information...";
@@ -55,7 +55,7 @@ function fetchPatientInfo(){
         alert(`Failed to retrieve patient's information: ${error}`);
     });
 }
-function fetchConditions(){
+function fetchConditions() {
     let span = createNode("span");
     append(conditionsSection, span);
     span.innerHTML = "<br><br>Retrieving patient's active conditions...";
@@ -65,8 +65,8 @@ function fetchConditions(){
     .then(function(data) {
         allConditions = data.entry;
 
-        for(let i = 0; i < allConditions.length; i++){
-            if(allConditions[i].resource.clinicalStatus === "active"){
+        for(let i = 0; i < allConditions.length; i++) {
+            if(allConditions[i].resource.clinicalStatus === "active") {
                 let condition = {
                     name: allConditions[i].resource.code.text,
                     dateRecorded: allConditions[i].resource.dateRecorded
@@ -87,7 +87,7 @@ function fetchConditions(){
         alert(`Failed to retrieve patient's conditions: ${error}`);
     });
 }
-function displayActiveConditions(){
+function displayActiveConditions() {
     let headingRow = createNode("tr"),
         nameHeading = createNode("th"),
         dateHeading = createNode("th"),
@@ -101,7 +101,7 @@ function displayActiveConditions(){
     append(headingRow, dateHeading);
     append(headingRow, linkHeading);
 
-    for(let i = 0; i < activeConditions.length; i++){
+    for(let i = 0; i < activeConditions.length; i++) {
         let condition = createNode("tr"),
             name = createNode("td"),
             date = createNode("td"),
@@ -117,20 +117,20 @@ function displayActiveConditions(){
         append(condition, link);
     }
 }
-function sortActiveConditionsByDate(){
+function sortActiveConditionsByDate() {
     conditionsTable.parentNode.removeChild(conditionsTable);
     activeConditions.sort(sortDates);
     conditionsTable = createNode("table");
     displayActiveConditions();
 }
-function sortDates(b, a){
+function sortDates(b, a) {
     const dateA = a.dateRecorded;
     const dateB = b.dateRecorded;
     let comparison = 0;
 
-    if(dateA > dateB){
+    if(dateA > dateB) {
         comparison = 1;
-    } else if(dateA < dateB){
+    } else if(dateA < dateB) {
         comparison = -1;
     }
     return comparison;
